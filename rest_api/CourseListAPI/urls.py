@@ -1,7 +1,8 @@
 from django.urls import path
-from .views import courses
-
+from .views import Courses, Course
 
 urlpatterns = [
-    path("courses/", courses, name="courses_api")
+    path("courses", Courses.as_view(), name="courses_view_no_slash"),  
+    path("courses/", Courses.as_view(), name="courses_view_with_slash"),  
+    path("courses/<int:pk>", Course.as_view(), name="courses_view_with_slash"),
 ]

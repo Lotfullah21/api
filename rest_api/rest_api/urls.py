@@ -1,9 +1,13 @@
 from django.contrib import admin
 from django.urls import path, include
-from CourseListAPI.views import courses
+from django.conf import settings
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('',courses),
-    path("api/", include("CourseListAPI.urls"))
+    path("api/", include("CourseListAPI.urls")),  
 ]
+
+# Debug toolbar URL
+if settings.DEBUG:
+    import debug_toolbar
+    urlpatterns += [path('__debug__/', include(debug_toolbar.urls))]
