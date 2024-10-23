@@ -1,33 +1,23 @@
 from django.shortcuts import render
 from rest_framework.response import Response
-from rest_framework import status
 from rest_framework.decorators import api_view
 from rest_framework.views import APIView
+from .models import Course
+from .serializers import CourseSerializer
+from django.shortcuts import get_list_or_404
 
-
-# Create your views here.
-
-@api_view(["POST","GET"])
-def courses(request):
-    return Response("list of courses provided by hooshmandlab",status=status.HTTP_200_OK)
-    
-    
+# create your views here.
 class Courses(APIView):
     def get(self, request):
-        instructor = request.GET.get("instructor")
-        if instructor: 
-            return Response({"messages":"list of courses by "+instructor}, status.HTTP_200_OK)
-        return Response({"messages":"list of courses"}, status.HTTP_200_OK)
-    
-    
-    def post(self, request):
-        title = request.data.get("title")
-        return Response({"message":title + " created"}, status=status.HTTP_200_OK)
-    
-    
-class Course(APIView):
-    def get(self, request, pk):
-        return Response({"message":"course with id = " + str(pk)})
-    def put(self, request, pk):
-        title = request.data.get("title")
-        return Response({"message":title + " created"})
+        courses = Course.objects.select_related("category").all()
+        print(type(courses))
+        # covert a queryset to json, many=True is essential here.
+        serialized_courses = CourseSerializer(courses, many=True)
+        return Response(serialized_courses.data)
+
+# create your views here.
+class SingleCourse(APIView):
+    def get(self, request, id):
+        course = get_list_or_404(Course, pk=id)
+        serialized_course = CourseSerializer(course)
+        return Response(serialized_course.data)

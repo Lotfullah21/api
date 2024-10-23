@@ -5,6 +5,8 @@ from django.conf import settings
 urlpatterns = [
     path('admin/', admin.site.urls),
     path("api/", include("CourseListAPI.urls")),  
+    path("api/", include("hooshmandlab.urls")),  
+ 
 ]
 
 # Debug toolbar URL

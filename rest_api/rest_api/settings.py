@@ -1,12 +1,7 @@
 from pathlib import Path
-
-
 import os
 from dotenv import load_dotenv
 load_dotenv() 
-
-
-
 
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -31,7 +26,10 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'rest_framework',
-    'debug_toolbar'
+    'debug_toolbar',
+    "CourseListAPI",
+    "hooshmandlab"
+
 ]
 
 MIDDLEWARE = [
@@ -123,7 +121,7 @@ STATIC_URL = 'static/'
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 # to allow our API end points work without trailing slash
-APPEND_SLASH = False
+# APPEND_SLASH = False
 
 INTERNAL_IPS = [
     '127.0.0.1',
@@ -131,4 +129,21 @@ INTERNAL_IPS = [
 
 DEBUG_TOOLBAR_CONFIG = {
     'SHOW_COLLAPSED': True,  # Toolbar will be collapsed by default
+}
+
+
+# Renderer
+REST_FRAMEWORK = {
+    'DEFAULT_RENDERER_CLASSES': [
+        'rest_framework.renderers.JSONRenderer',
+        'rest_framework.renderers.BrowsableAPIRenderer',
+        'rest_framework_xml.renderers.XMLRenderer',
+    ],
+    'DEFAULT_FILTER_BACKENDS': [
+        'django_filters.rest_framework.DjangoFilterBackend',
+        'rest_framework.filters.OrderingFilter',
+        'rest_framework.filters.SearchFilter',
+    ],
+    'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.PageNumberPagination',
+    'PAGE_SIZE': 2
 }
