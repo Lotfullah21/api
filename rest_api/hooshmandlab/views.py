@@ -2,12 +2,19 @@ from CourseListAPI.models import Course
 from .serializers import CourseSerializer
 from rest_framework.response import Response
 from rest_framework.views import APIView
+from rest_framework.decorators import api_view, throttle_classes
 from django.core.paginator import Paginator, EmptyPage
+from rest_framework.permissions import IsAuthenticated
+from rest_framework.decorators import permission_classes
+from rest_framework.throttling import AnonRateThrottle
+from rest_framework.throttling import UserRateThrottle
+from .throttles import FiveCallsPerMinute
 # Create your views here
 
 
 
 class Courses(APIView):
+    throttle_classes = [AnonRateThrottle, UserRateThrottle]
     MAX_PER_PAGE = 10
     def get(self, request):
         courses = Course.objects.all()
@@ -46,3 +53,26 @@ class Courses(APIView):
 
         
         
+@api_view()
+@permission_classes([IsAuthenticated])
+def secret(request):
+    return Response({"message":"some secret message"})
+        
+@api_view()
+@permission_classes([IsAuthenticated])
+def teachers_view(request):
+    if request.user.groups.filter(name="Instructors").exists():
+        return Response({"message":"Only for instructors only!!!"})
+    else:
+        return Response({"message":"You does not belong to Instructor group"}, 403)
+    
+@throttle_classes([AnonRateThrottle])
+@api_view()
+def throttle_check(request):
+    return Response({"message": "From throttling"})
+
+@api_view()
+@throttle_classes([FiveCallsPerMinute])
+@permission_classes([IsAuthenticated])
+def throttle_check_auth(request):
+    return Response({"message": "From authenticated throttling"})

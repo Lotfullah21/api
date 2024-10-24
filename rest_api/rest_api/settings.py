@@ -19,6 +19,7 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
+    "hooshmandlab",
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -26,9 +27,12 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'rest_framework',
+    'rest_framework.authtoken',
     'debug_toolbar',
     "CourseListAPI",
-    "hooshmandlab"
+    'django_filters',
+    "djoser",
+    "rest_framework_simplejwt",
 
 ]
 
@@ -144,6 +148,31 @@ REST_FRAMEWORK = {
         'rest_framework.filters.OrderingFilter',
         'rest_framework.filters.SearchFilter',
     ],
+    
+    
+    
+   'DEFAULT_THROTTLE_CLASSES': [
+        'rest_framework.throttling.AnonRateThrottle',  
+    ],
+    'DEFAULT_THROTTLE_RATES': {
+        'anon': '200/minute',  
+        'user':'200/minute',
+    },
+    
+    'DEFAULT_AUTHENTICATION_CLASSES':['rest_framework.authentication.TokenAuthentication',
+                                      'rest_framework.authentication.SessionAuthentication',
+                                      'rest_framework_simplejwt.authentication.JWTAuthentication',],
     'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.PageNumberPagination',
-    'PAGE_SIZE': 2
+    'PAGE_SIZE': 2,
+}
+
+DJOSER = {
+    "USER_ID_FIELD":"username", 
+}
+
+from datetime import timedelta
+
+SIMPLE_JWT = {
+    'ACCESS_TOKEN_LIFETIME': timedelta(minutes=5),  # Customize token lifetime
+    'REFRESH_TOKEN_LIFETIME': timedelta(days=1),    # Customize refresh token lifetimes
 }
