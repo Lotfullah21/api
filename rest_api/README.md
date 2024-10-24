@@ -7,7 +7,6 @@ This documentation is organized into several key sections to help developers bui
 #### General API Docs
 
 - [Command](./documents/COMMAND.MD)
-- [Database](./documents/DATABASE.MD)
 - [DRF](./documents/DRF.MD)
 - [Response Types](./documents/RESONSE_TYPES.md)
 - [Rest API](./documents/REST_API.MD)
