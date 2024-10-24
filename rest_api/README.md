@@ -34,7 +34,7 @@ This documentation is organized into several key sections to help developers bui
 - [Sanitization](./documents/serialization/SANITIZATION.MD)
 - [Serializers](./documents/serialization/SERIALIZERS.MD)
 - [Validation](./documents/serialization/VALIDATION.MD)
-- [API View](./documents/serialization/API_VIEW.MD)
+- [API View](./documents/API_VIEW.MD)
 
 ## HTTPS
 
