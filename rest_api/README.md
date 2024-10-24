@@ -1,3 +1,41 @@
+# Rest API Documentation
+
+Welcome to the **Rest API Documentation** repository! This repository contains detailed documentation for building and managing RESTful APIs using Django Rest Framework (DRF) with authentication, serialization, and various advanced features like filtering, pagination, and caching.
+
+This documentation is organized into several key sections to help developers build scalable and maintainable APIs for applications like online learning platforms, It covers topics such as authentication, search filtering, API serialization, validation, and much more.
+
+#### General API Docs
+
+- [Command](./documents/COMMAND.MD)
+- [Database](./documents/DATABASE.MD)
+- [DRF](./documents/DRF.MD)
+- [Response Types](./documents/RESONSE_TYPES.md)
+- [Rest API](./documents/REST_API.MD)
+- [Rest Principles](./documents/REST_PRINCIPLES.MD)
+- [Setup](./documents/SETUP.md)
+
+#### Authentication
+
+- [Djoser](./documents/Authentication/DJOSER.MD)
+- [JWT](./documents/Authentication/JWT.MD)
+- [Throttling](./documents/Authentication/THROTTLING.MD)
+- [Token](./documents/Authentication/TOKEN.MD)
+
+#### Filter/Search
+
+- [Caching](./documents/filter-search/CACHING.MD)
+- [Filtering](./documents/filter-search/FILTERING.MD)
+- [Ordering](./documents/filter-search/ORDERING.MD)
+- [Pagination](./documents/filter-search/PAGINATION.MD)
+
+#### Serialization
+
+- [Renderers](./documents/serialization/RENDERERS.MD)
+- [Sanitization](./documents/serialization/SANITIZATION.MD)
+- [Serializers](./documents/serialization/SERIALIZERS.MD)
+- [Validation](./documents/serialization/VALIDATION.MD)
+- [API View](./documents/serialization/API_VIEW.MD)
+
 ## HTTPS
 
 While making a request to a browser or submit a form, our data is transmitted using `HTTP` or `HTTPS`.
@@ -132,3 +170,28 @@ for instance `200` means everything is ok and many other status code.
 - [insomnia](https://docs.insomnia.rest/)
 - [postman](https://www.postman.com/)
 - [psotman-docs](https://www.postman.com/postman/published-postman-templates/documentation/ae2ja6x/postman-echo?ctx=documentation)
+
+## Getting Started
+
+### Prerequisites
+
+- Python 3.x
+- Django
+- Django Rest Framework (DRF)
+
+### Installation
+
+To get started with this repository, clone it to your local machine and follow the instructions in the `SETUP.md` document for detailed setup steps.
+
+### Features
+
+- **Authentication**: Covers JWT, Token-based authentication, and Djoser integration.
+- **Filtering and Search**: Learn how to implement powerful filtering and searching mechanisms.
+- **Serialization**: Detailed explanations of how to serialize and validate your API data.
+- **Pagination and Throttling**: Manage large datasets efficiently with pagination and control API usage with throttling.
+
+Feel free to explore each document in the repository for comprehensive guidelines and code examples to help you integrate these features into your own projects.
+
+---
+
+If you have any questions, suggestions, or issues, please open a pull request or an issue in the repository.
