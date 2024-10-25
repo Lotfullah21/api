@@ -6,6 +6,11 @@ when we pull data from database, we cannot present them to the clients in their 
 
 for instance, from complex data types, such as querysets and model instances, into native Python data types that can easily be rendered into JSON, XML, or other content types
 
+<figure>
+<img src="./images//serialization.png" alt="serializers" height="340" width="992">
+<p align="center">serialization working progress</p>
+</figure>
+
 ## Deserializer
 
 deserializer parses the existing json data and convert it to an existing model.
@@ -60,6 +65,7 @@ class CourseSerializer(serializers.Serializer):
 now by adding `courses` list to our serializer, the list will converted to `JSON`.
 
 ```py
+# views.py
 from django.shortcuts import render
 from rest_framework.response import Response
 from rest_framework import status
@@ -79,17 +85,18 @@ class Courses(APIView):
 ```
 
 ```py
+# serializers.py
 class CourseSerializer(serializers.Serializer):
     id = serializers.IntegerField()
     course_title = serializers.CharField(max_length=149)
     price = serializers.FloatField()
 ```
 
-`APIView`: A class-based view provided by DRF that allows us defining HTTP methods like GET, POST, PUT, etc.
+##### `APIView`: A class-based view provided by DRF that allows us defining HTTP methods like GET, POST, PUT, etc.
 
 ## Model serializers
 
-instead of going through all writing all the attributes again, easily we can use meta class and get all the fields from original model.
+instead of going through writing all the attributes again, easily we can use meta class and get all the fields from original model, make sure you name it `fields.`
 
 ```py
 from rest_framework import serializers
@@ -109,7 +116,7 @@ class CourseSerializer(serializers.ModelSerializer):
     course_price = serializers.IntegerField(source = "price")
     class Meta:
         model = Course
-        fields=["id","course_title","price", "price]
+        fields=["id","course_title","price", "price"]
 ```
 
 ## Foreign key relation ship
@@ -143,7 +150,7 @@ class CourseSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Course
-        fields=["id","title","price", "price,"price_after_tax","category"]
+        fields=["id","title","course_price","price_after_tax","category"]
     def calculate_tax(self, course:Course):
         return Decimal(course.price) * Decimal(1.1)
 ```
@@ -168,7 +175,7 @@ class CourseSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Course
-        fields=["id","title","price", "price,"price_after_tax","category"]
+        fields=["id","title","price","price_after_tax","category"]
     def calculate_tax(self, course:Course):
         return Decimal(course.price) * Decimal(1.1)
 ```
@@ -183,11 +190,10 @@ from decimal import Decimal
 from .models import Course, Category
 
 class CourseSerializer(serializers.ModelSerializer):
-    course_price = serializers.IntegerField(source = "price")
     price_after_tax = serializers.SerializerMethodField(method_name="calculate_tax")
     class Meta:
         model = Course
-        fields=["id","title","price", "price,"price_after_tax","category"]
+        fields=["id","title","price","price_after_tax","category"]
         depth=1
 
     def calculate_tax(self, course:Course):
@@ -212,12 +218,12 @@ class CategorySerializer(serializers.ModelSerializer):
         fields = ["id", "slug","title"]
 
 class CourseSerializer(serializers.ModelSerializer):
-    course_price = serializers.IntegerField(source = "price")
     price_after_tax = serializers.SerializerMethodField(method_name="calculate_tax")
     # category = CategorySerializer(read_only=True)
     class Meta:
         model = Course
-        fields=["id","title","price,"price_after_tax","category"]
+        fields=["id","title","price","price_after_tax","category"]
+
     def calculate_tax(self, course:Course):
         return Decimal(course.price) * Decimal(1.1)
 ```
@@ -241,7 +247,7 @@ class Courses(APIView):
         return Response({"message":"data cannot be saved"})
 ```
 
-`request.data`: it captures the data sent in the body of POST request.
+##### `request.data`: it captures the data sent in the body of POST request.
 
 `CourseSerializer(data=data)`: The CourseSerializer is used to validate and transform the incoming data (which is JSON) into the Python objects necessary to create a Course model instance.
 
@@ -254,7 +260,7 @@ class Courses(APIView):
 As you can see, before saving the data, we are passing through a serializer to check against `CourseSerializer`, if it is valid and contains all necessary fields, only then save it to the model.
 this process is known as deserialization.
 
-` fields=["id","title","price,"price_after_tax","category"]`, note down how you have defined the fields in serializer, when posting a data, the field names should match the ones that are defined in serializer, for instance, in our original model we had `price`, but here we have changed it `course_price`, hence, when adding the data, it should be `course_price` and also for category, make sure it is existed in our database.
+` fields=["id","title","price,"price_after_tax","category"]`, note down how you have defined the fields in serializer, when posting a data, the field names should match the ones that are defined in serializer, for instance, in our original model we had `price`, but here we have changed it `course_price`, hence, when adding the data in the form, it should be `course_price` and also for category, make sure it is existed in our database.
 
 ```json
 {
@@ -266,9 +272,10 @@ this process is known as deserialization.
 
 ### read_only and write_only
 
-When we add `read_only and write_only` to our serializer field, if it is `read_only`, it means use it only when retrieving the data,
+When we add `read_only and write_only` to our serializer field, if it is `read_only`, it means, use it only when retrieving the data.
 
-`category_id (Write-only)`
+`category_id (Write-only)`:
+
 if it is `write_only`, it means it is not returned when retrieving the data but it is allowed or required when creating or updating the data.
 and role of `category_id` here is that when posting the data, it is not required to enter the entire category fields, `category_id` is sufficient here to link the data to a category present in our database.
 

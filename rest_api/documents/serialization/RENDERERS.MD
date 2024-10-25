@@ -7,7 +7,6 @@ renderers are responsible for displaying the output of our `APIs`.
 
 - `JSONRenderer`: displays JSON data
 - `BrowsableAPIRenderer`: displays browsable data
-- `XMLRenderer`: display XML data
 
 ### Third Party renderers
 
@@ -15,7 +14,7 @@ renderers are responsible for displaying the output of our `APIs`.
 - `YAML Renderer`
 - `JSONP Renderer`
 
-by default `JSON` uses two renderers `JSONRenderer` and `BrowsableAPIRenderer`.
+by default `DRF` uses two renderers `JSONRenderer` and `BrowsableAPIRenderer`.
 
 to initialize the type of renderers, add the following code in settings.py, DRF uses this code to initialize the type of APIs output data.
 

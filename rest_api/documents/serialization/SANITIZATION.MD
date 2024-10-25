@@ -31,6 +31,8 @@ Sanitize the field data using both the validate_field() and validate() methods. 
         return bleach.clean(value)
 ```
 
+#### !Important
+
 the main intention of bleach is to avoid html insertion in text based input, you cannot use bleach for number type values.
 
 ```py
