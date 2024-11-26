@@ -7,7 +7,7 @@ when we pull data from database, we cannot present them to the clients in their 
 for instance, from complex data types, such as querysets and model instances, into native Python data types that can easily be rendered into JSON, XML, or other content types
 
 <figure>
-<img src="./images//serialization.png" alt="serializers" height="240" width="992">
+<img src="./assets//serialization.png" alt="serializers" height="240" width="992">
 <p align="center">serialization working progress</p>
 </figure>
 

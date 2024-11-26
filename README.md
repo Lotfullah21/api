@@ -6,34 +6,40 @@ This documentation is organized into several key sections to help developers bui
 
 #### General API Docs
 
-- [Command](./rest_api/documents/COMMAND.MD)
-- [DRF](./rest_api/documents/DRF.MD)
-- [Response Types](./rest_api/documents/RESONSE_TYPES.md)
-- [Rest API](./rest_api/documents/REST_API.MD)
-- [Rest Principles](./rest_api/documents/REST_PRINCIPLES.MD)
+- [Command](./rest_api/documents/COMMAND.md)
+- [HTTP-HTTPS](./rest_api/documents/http-https/HTTP-HTTPS.md)
+- [Response Types](./rest_api/documents/http-https/RESONSE_TYPES.md)
+- [RESTfull-API](./rest_api/documents/rest-api/REST_API.md)
+- [Naming conventions](./rest_api/documents/rest-api/NAMING-CONVENTIONS.MD)
+- [Rest principles](./rest_api/documents/rest-api/REST_PRINCIPLES.md)
+- [Security-practices](./rest_api/documents/rest-api/SECURITY.md)
 - [Setup](./rest_api/documents/SETUP.md)
+
+#### Django Rest Framework
+
+- [DRF](./rest_api/documents/drf/DRF.md)
 
 #### Authentication
 
-- [Djoser](./rest_api/documents/Authentication/DJOSER.MD)
-- [JWT](./rest_api/documents/Authentication/JWT.MD)
-- [Throttling](./rest_api/documents/Authentication/THROTTLING.MD)
-- [Token](./rest_api/documents/Authentication/TOKEN.MD)
+- [Djoser](./rest_api/documents/Authentication/DJOSER.md)
+- [JWT](./rest_api/documents/Authentication/JWT.md)
+- [Throttling](./rest_api/documents/Authentication/THROTTLING.md)
+- [Token](./rest_api/documents/Authentication/TOKEN.md)
 
 #### Filter/Search
 
-- [Caching](./rest_api/documents/filter-search/CACHING.MD)
-- [Filtering](./rest_api/documents/filter-search/FILTERING.MD)
-- [Ordering](./rest_api/documents/filter-search/ORDERING.MD)
-- [Pagination](./rest_api/documents/filter-search/PAGINATION.MD)
+- [Caching](./rest_api/documents/filter-search/CACHING.md)
+- [Filtering](./rest_api/documents/filter-search/FILTERING.md)
+- [Ordering](./rest_api/documents/filter-search/ORDERING.md)
+- [Pagination](./rest_api/documents/filter-search/PAGINATION.md)
 
 #### Serialization
 
-- [Renderers](./rest_api/documents/serialization/RENDERERS.MD)
-- [Sanitization](./rest_api/documents/serialization/SANITIZATION.MD)
-- [Serializers](./rest_api/documents/serialization/SERIALIZERS.MD)
-- [Validation](./rest_api/documents/serialization/VALIDATION.MD)
-- [API View](./rest_api/documents/API_VIEW.MD)
+- [Renderers](./rest_api/documents/serialization/RENDERERS.md)
+- [Sanitization](./rest_api/documents/serialization/SANITIZATION.md)
+- [Serializers](./rest_api/documents/serialization/SERIALIZERS.md)
+- [Validation](./rest_api/documents/serialization/VALIDATION.md)
+- [API View](./rest_api/documents/API_VIEW.md)
 
 ## Getting Started
 
@@ -59,6 +65,3 @@ Feel free to explore each document in the repository for comprehensive guideline
 ---
 
 If you have any questions, suggestions, or issues, please open a pull request or an issue in the repository.
-
-
-

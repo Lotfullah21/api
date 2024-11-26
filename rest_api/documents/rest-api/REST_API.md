@@ -21,8 +21,9 @@ a client-server architecture contains a server to provide the resources and a cl
 
 #### 2. stateless
 
-it means server does not have any any info about state of the API client who is making the call and it cannot identify who is making the request or what their previously requested data was.
+it means server does not have any any info about state of the client who is making the call, So it cannot identify who is making the request or what their previously requested data was.
 in fact, state is only save on client machine not on the server.
+to help the server, more information should be included in an API.
 
 #### 3. cacheable
 
@@ -49,7 +50,7 @@ it means the system should offer a uniform interface to access the resource, for
 - use camelCase for variables and wrap them around {}, for instance `{}`, for instance `/courses/{courseId}`.
 - use meaningful words to convey what the API is about.
 - use forward slashes `/` to indicate relationships and hierarchical structure.
-- use nouns and never verbs, `/books/{bookId}`, not `/getBook/{bookId}`, `/books/{bookId}` and wrong one is `/books/delete`, we should make a request instead of using delete word.
+- use nouns and never verbs, `/books/{bookId}`, not `/getBook/{bookId}`; `/books/{bookId}` and wrong one is `/books/delete`, we should make a request instead of using delete word.
 - end api without forward slash at the end, `/books/{bookId}` not `/books/{bookId}/`.
 - use Query parameters for data types, in a url, everything after `?` will treated as query string, for instance `/books?author=knight`.
 
