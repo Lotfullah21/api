@@ -43,17 +43,6 @@ the layers could be
 
 it means the system should offer a uniform interface to access the resource, for instance, there should be unique `URL` for each resource.
 
-## Naming convention
-
-- always lowercase letters
-- hyper to separate multiple words
-- use camelCase for variables and wrap them around {}, for instance `{}`, for instance `/courses/{courseId}`.
-- use meaningful words to convey what the API is about.
-- use forward slashes `/` to indicate relationships and hierarchical structure.
-- use nouns and never verbs, `/books/{bookId}`, not `/getBook/{bookId}`; `/books/{bookId}` and wrong one is `/books/delete`, we should make a request instead of using delete word.
-- end api without forward slash at the end, `/books/{bookId}` not `/books/{bookId}/`.
-- use Query parameters for data types, in a url, everything after `?` will treated as query string, for instance `/books?author=knight`.
-
 ```py
 from django.shortcuts import render
 from rest_framework.response import Response

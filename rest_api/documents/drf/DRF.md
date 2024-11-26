@@ -17,6 +17,6 @@ The process of converting data to json, it converts complex data types to python
 - can enable social connection to authenticate the user
 
 <figure>
-<img src="./images/drf-dark.png" height="390" width="862" alt="start">
+<img src="./assets/drf-dark.png" height="390" width="862" alt="drf rest api">
 <figcaption><p align="center">DRF Rest API</p><figcaption>
 </figure>
