@@ -59,7 +59,7 @@ we can more than one query string by adding `&` in between.
 
 `google.com/?year=2022&month="Oct"`
 
-#### Query parameter
+# Query parameter
 
 Query parameter refer to the individual key-value pairs in the query string.
 
@@ -76,7 +76,45 @@ urlpatterns = [
 ]
 ```
 
-##### first method (standard django approach): name = request.GET["param-name"]
+## Accessing the query params
+
+### 1. Standard Django Approach: request.GET["param-name"]
+
+- ##### Behavior:
+
+- Accesses the value of a query parameter by its key.
+- Throws a KeyError if the parameter is missing.
+
+- ##### Use Case:
+
+When the query parameter is required and must always be present in the request.
+
+```py
+# views.py
+def get_course_query_string(request):
+    name = request.GET["name"]  # Will raise KeyError if "name" is missing
+    id = request.GET["id"]      # Will raise KeyError if "id" is missing
+    return HttpResponse(f"Course {name} has ID number: {id}")
+
+```
+
+#### Example url
+
+```sh
+http://127.0.0.1:8000/courses/course-info/?name=machine learning&id=12
+
+```
+
+### Error Example:
+
+If we omit id in the query string
+
+```py
+http://127.0.0.1:8000/courses/course-info/?name=machine learning
+
+```
+
+we get a KeyError: 'id'.
 
 ```py
 # views.py
@@ -86,25 +124,54 @@ def get_course_query_string(request):
     return HttpResponse(f"course {name}  has id number: {id}")
 ```
 
-##### second method (drf approach): name = request.GET.get("param-name")
+### 2. DRF Approach: request.GET.get("param-name")
+
+- ##### Behavior:
+
+- Safely retrieves the value of a query parameter by its key.
+- Returns None (or a default value) if the parameter is missing.
+
+- #### Use Case:
+
+- When the query parameter is optional or might be missing.
 
 ```py
 # views.py
-
 def get_course_query_string(request):
-    course = request.GET.get("course")
-    id = request.GET.get("id")
-    return HttpResponse(f"course {course}  has id number: {id}")
+    course = request.GET.get("course")  # Returns None if "course" is missing
+    id = request.GET.get("id")          # Returns None if "id" is missing
+    return HttpResponse(f"Course {course} has ID number: {id}")
+
 ```
 
-```sh
-# url
-http://127.0.0.1:8000/courses/course-info/ml/12
+### Example URL:
+
+```ruby
+http://127.0.0.1:8000/courses/course-info/?course=AI&id=101
+
 ```
 
-`query=apple` is a query parameter.
+#### Missing Parameters:
 
-query parameters for optional filters or settings and path parameters for identifying specific resources
+If id is missing
+
+```ruby
+http://127.0.0.1:8000/courses/course-info/?course=AI
+
+```
+
+```mathematica
+Course AI has ID number: None
+```
+
+Key differences
+
+| **Aspect**                         | **Standard Django (`request.GET["key"]`)** | **DRF (`request.GET.get("key")`)**                     |
+| ---------------------------------- | ------------------------------------------ | ------------------------------------------------------ |
+| **Error Handling**                 | Throws `KeyError` if the key is missing.   | Returns `None` if the key is missing.                  |
+| **Default Value**                  | Not supported.                             | Can specify a default value (`get("key", "default")`). |
+| **Use Case**                       | Required query parameters.                 | Optional or potentially missing parameters.            |
+| **Example Behavior (Key Missing)** | `KeyError: 'key'`                          | Returns `None` or default value.                       |
 
 | Feature             | **Query String**                                                          | **Query Parameters**                                                           | **Path Parameters**                                                         |
 | ------------------- | ------------------------------------------------------------------------- | ------------------------------------------------------------------------------ | --------------------------------------------------------------------------- |
@@ -114,6 +181,10 @@ query parameters for optional filters or settings and path parameters for identi
 | **Syntax**          | Starts with `?` followed by `key=value` pairs separated by `&`.           | `key=value` pairs. Each parameter is separated by `&`.                         | Typically part of the path structure with no special symbols.               |
 | **Use Cases**       | Used for filtering, sorting, pagination, or search terms.                 | Filters, sorting options, pagination values (e.g., `page=2`), etc.             | Used for resource identification like `/users/{id}` or `/products/{id}`.    |
 | **Example**         | `?category=fruits&sort=price`                                             | `category=fruits`, `sort=price`                                                | `/products/456`, `/users/123`                                               |
+
+### Note:
+
+`query parameters` for optional filters or settings and `path parameters` for identifying specific resources
 
 # Body parameter
 

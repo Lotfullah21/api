@@ -110,9 +110,40 @@ class CourseView(generics.ListCreateAPIView):
 The RetrieveAPIView is designed to retrieve a single object based on the pk (or other lookup field) provided in the request. The framework automatically filters the queryset based on the primary key or the lookup field provided in the URL.
 
 ```py
-
 class SingleCourse(generics.RetrieveAPIView):
     queryset = Course.objects.all()
     serializer_class = CourseSerializer
+```
+
+## Posting data
+
+When posting data, generally there is two scenarios.
+
+1. straight forward, no relationship and all the fields match with what is expected
+2. when we have foreign relationships and we want to handel them explicitly, to do this, we need to override the default create method in `serializers.py`
+
+```py
+from rest_framework import serializers
+from .models import Course, CourseCategory
+
+
+class CategorySerializer(serializers.ModelSerializer):
+    class Meta:
+        model = CourseCategory
+        fields=["id","category_name"]
+
+class CourseSerializer(serializers.ModelSerializer):
+    category_id = serializers.PrimaryKeyRelatedField(queryset = CourseCategory.objects.all(), write_only=True)
+    category = CategorySerializer(source="category_id", read_only=True)
+    class Meta:
+        model = Course
+        fields = ["id","course_name","slug","category_id","category"]
+
+    def create(self, validated_data):
+        category_id = validated_data.pop("category_id")
+        course = Course.objects.create(category_id=category_id, **validated_data)
+        return course
 
 ```
+
+To do the extra work and send a custom message after successful creation, override the create method in `views.py`.

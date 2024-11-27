@@ -28,23 +28,26 @@ This documentation is organized into several key sections to help developers bui
 
 #### Serialization
 
-- [Renderers](./rest_api/documents/serialization/RENDERERS.md)
-- [Serializers](./rest_api/documents/serialization/SERIALIZERS.md)
 - [Serializers](./rest_api/documents/serialization/SERIALIZERS.md)
 - [Generics-views](./rest_api/documents/serialization/GENERICS.md)
 - [Deserialization](./rest_api/documents/serialization/DESERIALIZER.md)
 - [Sanitization](./rest_api/documents/serialization/SANITIZATION.md)
+- [Model-creation](./rest_api/documents/serialization/MODEL-CREATION.md)
 - [Validation](./rest_api/documents/serialization/VALIDATION.md)
+- [Renderers](./rest_api/documents/serialization/RENDERERS.md)
+- [Renderers](./rest_api/documents/serialization/MODEL-CREATION.md)
 
 #### Filter/Search
 
-- [Caching](./rest_api/documents/filter-search/CACHING.md)
-- [Filtering](./rest_api/documents/filter-search/FILTERING.md)
+- [Filtering-searching](./rest_api/documents/filter-search/FILTERING.md)
+- [Filtering-class-based-views](./rest_api/documents/filter-search/FILTERING-CLASSBASED-VIEWS.md)
 - [Ordering](./rest_api/documents/filter-search/ORDERING.md)
+- [Caching](./rest_api/documents/filter-search/CACHING.md)
 - [Pagination](./rest_api/documents/filter-search/PAGINATION.md)
 
 #### Authentication and securing APIs
 
+- [API-restriction](./rest_api/documents/Authentication/AUTH.md)
 - [Djoser](./rest_api/documents/Authentication/DJOSER.md)
 - [JWT](./rest_api/documents/Authentication/JWT.md)
 - [Throttling](./rest_api/documents/Authentication/THROTTLING.md)
