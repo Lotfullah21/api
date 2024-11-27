@@ -8,7 +8,7 @@ This documentation is organized into several key sections to help developers bui
 
 - [Command](./documents/COMMAND.md)
 - [HTTP-HTTPS](./documents/http-https/HTTP-HTTPS.md)
-- [Response-types](./documents/http-https/RESONSE_TYPES.md)
+- [Response-types](./documents/http-https/RESONSE-TYPES.md)
 - [URL](./documents/http-https/URL.md)
 
 #### RESTful API
