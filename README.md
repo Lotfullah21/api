@@ -30,6 +30,7 @@ This documentation is organized into several key sections to help developers bui
 
 - [Renderers](./rest_api/documents/serialization/RENDERERS.md)
 - [Serializers](./rest_api/documents/serialization/SERIALIZERS.md)
+- [Serializers](./rest_api/documents/serialization/SERIALIZERS.md)
 - [Generics-views](./rest_api/documents/serialization/GENERICS.md)
 - [Deserialization](./rest_api/documents/serialization/DESERIALIZER.md)
 - [Sanitization](./rest_api/documents/serialization/SANITIZATION.md)
