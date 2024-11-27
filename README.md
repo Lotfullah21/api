@@ -11,9 +11,9 @@ This documentation is organized into several key sections to help developers bui
 - [Response-types](./rest_api/documents/http-https/RESONSE_TYPES.md)
 - [URL](./rest_api/documents/http-https/URL.md)
 
-#### RESTFull API
+#### RESTful API
 
-- [RESTfull-API](./rest_api/documents/rest-api/REST_API.md)
+- [RESTful-API](./rest_api/documents/rest-api/REST_API.md)
 - [Naming-conventions](./rest_api/documents/rest-api/NAMING-CONVENTIONS.MD)
 - [Rest-principles](./rest_api/documents/rest-api/REST_PRINCIPLES.md)
 - [Security-practices](./rest_api/documents/rest-api/SECURITY.md)
@@ -29,8 +29,10 @@ This documentation is organized into several key sections to help developers bui
 #### Serialization
 
 - [Renderers](./rest_api/documents/serialization/RENDERERS.md)
-- [Sanitization](./rest_api/documents/serialization/SANITIZATION.md)
 - [Serializers](./rest_api/documents/serialization/SERIALIZERS.md)
+- [Generics-views](./rest_api/documents/serialization/GENERICS.md)
+- [Deserialization](./rest_api/documents/serialization/DESERIALIZER.md)
+- [Sanitization](./rest_api/documents/serialization/SANITIZATION.md)
 - [Validation](./rest_api/documents/serialization/VALIDATION.md)
 
 #### Filter/Search
@@ -70,4 +72,4 @@ Feel free to explore each document in the repository for comprehensive guideline
 
 ---
 
-If you have any questions, suggestions, or issues, please open a pull request or an issue in the repository.
+If you have any questions, suggestions, or issues, please open a ful request or an issue in the repository.

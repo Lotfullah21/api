@@ -102,3 +102,17 @@ class CourseView(generics.ListCreateAPIView):
     def get(self, request, *args, **kwargs):
         return Response(‘new response’)
 ```
+
+## Single Item
+
+### Retrieve View Usage:
+
+The RetrieveAPIView is designed to retrieve a single object based on the pk (or other lookup field) provided in the request. The framework automatically filters the queryset based on the primary key or the lookup field provided in the URL.
+
+```py
+
+class SingleCourse(generics.RetrieveAPIView):
+    queryset = Course.objects.all()
+    serializer_class = CourseSerializer
+
+```
