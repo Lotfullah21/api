@@ -115,9 +115,19 @@ class SingleCourse(generics.RetrieveAPIView):
     serializer_class = CourseSerializer
 ```
 
+Define a url pattern
+
+```ruby
+from django.urls import path
+from .views import SingleCourse
+urlpatterns = [
+    path("courses/<int:pk>",SingleCourse.as_view(), name="single_course"),
+]
+```
+
 ## Posting data
 
-When posting data, generally there is two scenarios.
+When posting data, generally there are two scenarios.
 
 1. straight forward, no relationship and all the fields match with what is expected
 2. when we have foreign relationships and we want to handel them explicitly, to do this, we need to override the default create method in `serializers.py`
