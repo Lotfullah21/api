@@ -45,6 +45,61 @@ REST_FRAMEWORK = {
 
     ],
 'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.PageNumberPagination',
-'PAGE_SIZE': 2
+# now 10 items per page will be served.
+'PAGE_SIZE': 10
 }
 ```
+
+## End point
+
+```ruby
+# Get us the resource in page number 2
+http://127.0.0.1:8000/courses/?page=2
+```
+
+### Pagination for Specific Class-Based View
+
+If we want pagination only for a specific view, we can explicitly define it by overriding the pagination_class in class-based view.
+
+```py
+from rest_framework.pagination import PageNumberPagination
+from rest_framework.generics import ListAPIView
+from .models import Course
+from .serializers import CourseSerializer
+
+class CoursePagination(PageNumberPagination):
+     # number of results per page
+    page_size = 10
+    # clients to specify page size, perpage=10
+    page_size_query_param = "perpage"
+     # maximum page size allowed
+    max_page_size = 20
+
+class CourseListView(ListAPIView):
+    queryset = Course.objects.all()
+    serializer_class = CourseSerializer
+    # custom pagination
+    pagination_class = CoursePagination
+
+```
+
+```ruby
+http://127.0.0.1:8000/courses/?perpage=5
+```
+
+### 5. Global Configuration (Optional)
+
+we want to make this behavior global, set PAGE_SIZE_QUERY_PARAM in settings.py:
+
+```py
+
+REST_FRAMEWORK = {
+    'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.PageNumberPagination',
+    'PAGE_SIZE': 10,  # Default page size
+    'PAGE_SIZE_QUERY_PARAM': 'perpage',  # Allow query param for dynamic page size
+    'MAX_PAGE_SIZE': 50,  # Optional: Maximum page size
+}
+
+```
+
+Sometimes, the global one, especially perpage does not work but when we define the custom one, it works.

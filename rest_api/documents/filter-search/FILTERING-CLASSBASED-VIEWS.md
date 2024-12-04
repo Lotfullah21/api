@@ -34,7 +34,7 @@ class CourseList(generics.ListCreateAPIView):
     queryset = Course.objects.all()
     serializer_class = CourseSerializer
     filter_backends = [DjangoFilterBackend, filters.SearchFilter]
-    filterset_fields = ['category_id']  # Filter by related fields
+    filterset_fields = ['level','course_start_date']  # Filter by related fields
     search_fields = ['course_name', 'slug']  # Search by course name or slug
 
     def create(self, request, *args, **kwargs):
@@ -49,16 +49,23 @@ class CourseList(generics.ListCreateAPIView):
 
 ```
 
+The fields specified in search_fields and filterset_fields should match the model fields or related model fields (when using double underscores for nested lookups). They do not need to match the serializer fields.
+
+The serializer is responsible for formatting the output and may have fields not directly related to the model.
+
+These fields cannot be used in search_fields or filterset_fields because the filtering/searching logic works directly on the queryset.
+
 ### Example Query Strings:
 
-Filter by category_id
+###### Filter
 
 ```ruby
-GET /courses/list/?category_id=1
+GET /courses/list/?level=easy
+GET /courses/list/?course_start_date=2024-12-01
 
 ```
 
-Search by course_name or slug
+##### Search by course_name or slug
 
 ```ruby
 GET /courses/list/?search=machine
@@ -106,3 +113,21 @@ INSTALLED_APPS = [
     'django_filters',
 ]
 ```
+
+| **Aspect**        | **Search**                                   | **Filter**                                                            |
+| ----------------- | -------------------------------------------- | --------------------------------------------------------------------- |
+| **Purpose**       | To search text-based fields for a keyword    | To filter records based on exact or range values for specific fields  |
+| **Use Case**      | Finding records that contain a keyword       | Narrowing down results based on specific criteria (e.g., level, date) |
+| **Matching Type** | Text-based "contains" or "icontains"         | Exact matching or range-based (e.g., exact, gte, lte, in)             |
+| **Flexibility**   | Searches multiple fields for partial matches | Filters based on specific fields and conditions                       |
+| **Example Query** | `/courses/?search=python`                    | `/courses/?level=easy&subject=python`                                 |
+
+`search_fields` option in Django Rest Framework (DRF), it refers to the fields of the model specified in the queryset. If we have multiple models with similar fields like title and description, the search fields will apply to the fields within the model we are working with, as defined in serializer_class.
+
+For example, in CourseList view, the search query /courses/?search=python will search the title and description fields of the Course model because we've specified them in the search_fields for that view.
+
+for different models like Course, Lesson, Module, etc., and each of them has title and description fields, we need to specify the search_fields separately in each view or serializer.
+
+## Foreign Key relationships
+
+Now, let's say we want to look for subject's title course model, then `model__query` have to be used.

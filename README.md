@@ -42,8 +42,10 @@ This documentation is organized into several key sections to help developers bui
 - [Filtering-searching](./rest_api/documents/filter-search/FILTERING.md)
 - [Filtering-class-based-views](./rest_api/documents/filter-search/FILTERING-CLASSBASED-VIEWS.md)
 - [Ordering](./rest_api/documents/filter-search/ORDERING.md)
-- [Caching](./rest_api/documents/filter-search/CACHING.md)
-- [Pagination](./rest_api/documents/filter-search/PAGINATION.md)
+- [caching](./rest_api/documents/caching/CACHING.md)
+- [caching-types](./rest_api/documents/caching/CACHING-TYPES.md)
+- [redis](./rest_api/documents/caching/REDIS.md)
+- [redis-gcp](./rest_api/documents/caching/REDIS-GCP.md)
 
 #### Authentication and securing APIs
 
